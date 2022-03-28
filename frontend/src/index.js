@@ -5,14 +5,19 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import CssBaseline from '@mui/material/CssBaseline';
-
-
+import { RecoilRoot } from 'recoil';
+// setup fake backend
+import { fakeBackend } from './_helpers';
+fakeBackend();
 ReactDOM.render(
   <React.StrictMode>
+    
     <CssBaseline>
     <BrowserRouter>
-    <App />
-  </BrowserRouter>
+    <RecoilRoot><App /></RecoilRoot>
+    
+    </BrowserRouter>
+    
   </CssBaseline>
   </React.StrictMode>,
   document.getElementById('root')

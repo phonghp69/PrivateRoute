@@ -1,4 +1,3 @@
-export * from './auth-header';
 export * from './fake-backend';
-export * from './handle-response';
+export * from './fetch-wrapper';
 export * from './history';

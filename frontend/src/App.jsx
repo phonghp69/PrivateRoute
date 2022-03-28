@@ -3,12 +3,15 @@ import Leftbar from "./Layouts/Leftbar/Leftbar";
 import Main from "./Layouts/Main/Main";
 import { Grid } from "@mui/material";
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Router, Route, Navigate, Routes} from "react-router-dom";
 import "./App.css";
-import LoginPage from "./Pages/LoginPage/LoginPage";
-
+import Login from "./Pages/LoginPage/LoginPage";
+import Home from "./Pages/HomePage/Home";
+import { PrivateRoute } from './Routes/PrivateRoute';
+import { history } from './_helpers/history';
 function App() {
   return (
+  
     <div className="App">
       <Topbar />
 
@@ -24,13 +27,19 @@ function App() {
           }}
         >
           <Main />
-          <Routes>
-            <Route path="/login" element={<LoginPage />} />
-          </Routes>
+          <Router history={history} >
+                   <Routes>
+                        <PrivateRoute exact path="/" component={Home} />
+                        <Route path="/login" component={Login} />
+                        <Navigate from="*" to="/" />
+                   
+                </Routes>
+            </Router>
         </Grid>
       </Grid>
 
     </div>
+   
   );
 }
 

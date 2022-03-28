@@ -1,17 +1,21 @@
-import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Navigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
 
-import { authenticationService } from '@/_services';
+import { authAtom } from '../Services/auth';
 
-export const PrivateRoute = ({ component: Component, ...rest }) => (
-    <Route {...rest} render={props => {
-        const currentUser = authenticationService.currentUserValue;
-        if (!currentUser) {
-            // not logged in so redirect to login page with the return url
-            return <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
-        }
+export { PrivateRoute };
 
-        // authorised so return component
-        return <Component {...props} />
-    }} />
-)
+function PrivateRoute({ component: Component, ...rest }) {
+    const auth = useRecoilValue(authAtom);
+    return (
+        <Route {...rest} render={props => {
+            if (!auth) {
+                // not logged in so Navigate to login page with the return url
+                return <Navigate to={{ pathname: '/login', state: { from: props.location } }} />
+            }
+
+            // authorized so return component
+            return <Component {...props} />
+        }} />
+    );
+}
