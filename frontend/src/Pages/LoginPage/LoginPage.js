@@ -2,7 +2,7 @@ import React from "react";
 import { makeStyles } from "@mui/styles";
 import {useFormik} from "formik"
 import * as Yup from "yup"
-import  {loginService}  from '../../Services/services'
+// import  {loginService}  from '../../Services/services'
 import { useNavigate } from "react-router-dom";
 const styles = makeStyles({
   form: {
@@ -73,12 +73,12 @@ const Login = () => {
     }),
     onSubmit: () => { 
       console.log("OK")
-        loginService().then((response)=>{
-          localStorage.setItem("token", response.data.token)
-          localStorage.setItem("userID", response.data.userId)
-          navigatge('/')
-          window.location.reload()
-        })
+        // loginService().then((response)=>{
+        //   localStorage.setItem("token", response.data.token)
+        //   localStorage.setItem("userID", response.data.userId)
+        //   navigatge('/')
+        //   window.location.reload()
+        // })
     }
 });
 
